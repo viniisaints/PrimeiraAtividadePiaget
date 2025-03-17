@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using WebPiaget.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<WebPiagetContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("WebPiagetContext") ?? throw new InvalidOperationException("Connection string 'WebPiagetContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
